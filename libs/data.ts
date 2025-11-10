@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export interface News {
+export interface NewsArticle {
     title: string;
     description: string;
     urlToImage: string;
@@ -24,4 +24,14 @@ export async function getNewsData(query?: string) {
         throw new Error("Something went wrong")
     }
 
+}
+
+export async function getNewsByCategory(category: string) {
+    try {
+        const res = await axios.get(`https://newsapi.org/v2/top-headlines/sources?category=${category}&apiKey=${process.env.NEXT_PUBLIC_API_KEY}`)
+        return res.data.sources;
+    } catch (err) {
+        console.log(err)
+        throw new Error("Something went wrong")
+    }
 }

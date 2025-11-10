@@ -1,18 +1,26 @@
 "use client"
 
+import { NewsArticle } from "@/libs/data";
+import { FaBookmark } from "react-icons/fa";
+import { FaRegBookmark } from "react-icons/fa";
+
 type NewsCardProps = {
-    title: string;
-    description?: string | null;
-    urlToImage?: string | null;
-    source: string;
-    url: string;
+    article: NewsArticle
+    isBookmarked?: boolean;
+    onBookMarkClick: () => void;
 }
 
-export default function NewsCard({ title, description, urlToImage, source, url }: NewsCardProps) {
+export default function NewsCard({ article: { title, description, urlToImage, source, url }, isBookmarked, onBookMarkClick }: NewsCardProps) {
+
+
 
     const truncatedDescription = description && description.length > 100
         ? `${description.substring(0, 100)}...`
         : description
+
+    const handleBookmarkClick = () => {
+        onBookMarkClick()
+    }
 
     return (
         <div className="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white m-4 flex flex-col">
@@ -28,8 +36,11 @@ export default function NewsCard({ title, description, urlToImage, source, url }
                 <p className="text-gray-600 text-base">{truncatedDescription}</p>
             </div>
             <div className="flex items-center justify-around px-6 pt-4 pb-2 mb-4">
-                <a href={url} target="_blank" rel="noopener noreferrer" className="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out">Read More</a>
-                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 float-right">{source}</span>
+                <a href={url} target="_blank" rel="noopener noreferrer" className="inline-block bg-blue-500 hover:bg-blue-700 text-center text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out">Read More</a>
+                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-center text-sm font-semibold text-gray-700 float-right">{source.name}</span>
+                <div onClick={handleBookmarkClick} className="font-medium p-4 hover:cursor-pointer ">
+                    {isBookmarked ? <FaBookmark /> : <FaRegBookmark />}
+                </div>
             </div>
         </div>
     )
