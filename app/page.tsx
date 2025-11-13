@@ -1,9 +1,11 @@
-import HomePage from "./home/page";
+import NewsExplorer from "@/components/news-explorer";
+
 
 export default function Home() {
+
   return (
-    <div className="flex min-h-screen items-center justify-center ">
-      <HomePage />
+    <div>
+      <NewsExplorer />
     </div>
   );
 }

@@ -18,7 +18,7 @@ export default function Category({ onSelectChange }: CategoryProps) {
 
     return (
 
-        <div className="absolute top-0 left-5 mt-20">
+        <div className="relative">
             <select
                 name="category"
                 id="category"
